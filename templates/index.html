@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8" />
+    <title>Marja 12 arved</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css"
+      integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls"
+      crossorigin="anonymous"
+    />
+    <style>
+      .content {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      table {
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="content">
+      <h1>Marja 12 arved</h1>
+      <table class="pure-table pure-table-striped">
+        <thead>
+          <tr>
+            <th>Kuupäev</th>
+            {%- for apartment in apartments %}
+            <th>{{ apartment.name }}</th>
+            {%- endfor %}
+          </tr>
+        </thead>
+        <tbody>
+          {%- for date in dates %}
+          <tr>
+            <td>{{ date }}</td>
+            {%- for apartment in apartments %}
+            <td>
+              <a
+                href="arve-{{ date }}-{{ apartment.slug }}.pdf"
+                target="_blank"
+              >
+                arve-{{ date }}-{{ apartment.slug }}.pdf
+              </a>
+            </td>
+            {%- endfor %}
+          </tr>
+          {%- endfor %}
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

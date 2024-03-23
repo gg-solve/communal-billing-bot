@@ -1,0 +1,8 @@
+.venv
+credentials/*
+.vscode
+bills/*
+.env
+__pycache__/
+*.py[cod]
+*$py.class

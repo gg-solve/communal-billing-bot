@@ -1,0 +1,42 @@
+**Tartu linn, Marja tn 12 korteriühistu** +
+registrikood 80547876
+
+ARVE nr: {{ invoice_number }}
+
+[frame=none,grid=none,cols="1,1"]
+|===
+|Arve saaja: +
+KORTER {{ apartment_number }} +
+*{{ customer_name }}* +
+{{ customer_email }} +
+{{ customer_address }}
+
+>|Kuupäev: {{ bill_date }} +
+Maksetähtpäev: {{ due_date }} +
+Viivis: 0,05% päevas
+|===
+
+
+[cols="1,1,1,1"]
+|===
+|*Kirjeldus*
+|*Ühik*
+|*Kogus*
+|*Summa*
+
+{%- for line in lines %}
+|{{ line.description }}
+|{{ line.unit }}
+|{{ line.amount }}
+|{{ line.price }}
+{%- endfor %}
+|===
+
+[frame=none,grid=none,cols="1"]
+|===
+>|*Arve kokku (EUR): {{ total }}*
+|===
+
+TARTU LINN, MARJA TN 12 KORTERIÜHISTU +
+Swedbank a/a EE122200221070779959 +
+marja12.tartu@gmail.com
