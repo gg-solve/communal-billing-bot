@@ -1,5 +1,6 @@
 .venv
 credentials/*
+!credentials/.gitkeep
 .vscode
 bills/*
 .env
