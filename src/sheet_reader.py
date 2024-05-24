@@ -187,6 +187,19 @@ class SheetReader:
         # Get consumption
         consumption = self.get_consumption(date, apartment_slug)
 
+        # Sum water consumption for previous dates until a non-empty water bill is found
+        target_date_row_index = date_row_index - 1
+
+        while target_date_row_index > 2:
+            previous_date = self._dates[target_date_row_index-2]
+            
+            if self._bills_values[target_date_row_index, int(config("WATER_BILL_COLUMN"))] != "":
+                break
+            
+            previous_consumption = self.get_consumption(previous_date, apartment_slug)
+            consumption.water += previous_consumption.water
+            target_date_row_index -= 1
+
         # Get due date
         due_date = self._get_due_date(date_row_index)
 
@@ -216,6 +229,9 @@ class SheetReader:
             else:
                 amount = "N/A"
             
+            if billing_values[item.description] == "0.00":
+                continue
+
             billing_lines.append(BillingLine(item.description, item.unit, amount, billing_values[item.description]))
 
         return Bill(date, due_date, apartment, billing_lines, billing_values["kokku"])

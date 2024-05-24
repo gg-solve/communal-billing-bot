@@ -32,8 +32,9 @@ Viivis: 0,05% päevas
 {%- endfor %}
 |===
 
-[frame=none,grid=none,cols="1"]
+[frame=none,grid=none,cols="2"]
 |===
+|Vee arve esitatakse kord kvartalis.
 >|*Arve kokku (EUR): {{ total }}*
 |===
 
