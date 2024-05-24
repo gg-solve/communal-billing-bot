@@ -12,7 +12,8 @@ KORTER {{ apartment_number }} +
 {{ customer_address }}
 
 >|Kuupäev: {{ bill_date }} +
-Maksetähtpäev: {{ due_date }} +
+Mõõtude lugemise kuupäev: {{ meter_reading_date }} +
+*Maksetähtpäev: {{ due_date }}* +
 Viivis: 0,05% päevas
 |===
 

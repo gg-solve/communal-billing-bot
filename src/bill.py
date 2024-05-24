@@ -2,6 +2,7 @@ from typing import List
 import subprocess
 import jinja2
 import os
+from datetime import datetime
 from decouple import config
 
 from .apartment import Apartment
@@ -9,19 +10,20 @@ from .billing_line import BillingLine
 
 
 class Bill:
-    def __init__(self, date: str, due_date: str, apartment: Apartment, lines: List[BillingLine], total: str):
-        self.date = date
+    def __init__(self, meter_reading_date: str, due_date: str, apartment: Apartment, lines: List[BillingLine], total: str):
+        self.date = datetime.now().strftime("%Y-%m-%d")
+        self.meter_reading_date = meter_reading_date
         self.due_date = due_date
         self.apartment = apartment
         self.lines = lines
         self.total = total
     
     def _get_invoice_number(self):
-        yyyy_mm_dd = self.date.split("-")
+        yyyy_mm_dd = self.meter_reading_date.split("-")
         return f"{yyyy_mm_dd[0]}-{yyyy_mm_dd[1]}-{self.apartment.number}"
     
     def __repr__(self):
-        return f"{self.date} - {self.apartment} - {self.total}€"
+        return f"{self.meter_reading_date} - {self.apartment} - {self.total}€"
     
     def to_pdf(self):
         invoice_number = self._get_invoice_number()
@@ -44,6 +46,7 @@ class Bill:
             "invoice_number": invoice_number,
             "apartment_number": self.apartment.number,
             "bill_date": self.date,
+            "meter_reading_date": self.meter_reading_date,
             "due_date": self.due_date,
             "lines": self.lines,
             "customer_name": self.apartment.customer_name,
